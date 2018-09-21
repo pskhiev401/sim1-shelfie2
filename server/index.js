@@ -1,22 +1,25 @@
-const express = require ('express');
-    bodyParser = require ('body-parser');
-    ctlr = require ('./controller');
-    app = express ();
-    port = 3001;
+require('dotenv').config();
 
-app.use(bodyParser.json() );
+const express = require ('express'),
+{ json } = require('body-parser'),
+    // ctlr = require ('./controller'),
+    app = express (),
+    port = process.env.PORT || 3001,
+    massive = require('massive')
+    // {getBands, postBand, putBand, deleteBand} = require('./bandCtrl');
 
-// ------------ GET CRUD ------------
-// app.get('/api/ships/', shipCtlr.getLaunches)
+    app.use(json()); // place this line above .get request
 
-// app.get('/api/favorites/', shipCtlr.getFavorites)
-// app.post('/api/ships/', shipCtlr.addFaves)
+    massive(process.env.CONNECTION_STRING).then(dbInstance => {
+        // console.log('dbInstance', dbInstance);
+        app.set('db', dbInstance);
+        dbInstance.init();
+    });
+    
+    // app.get('/api/bands', getBands);
+    // app.post('/api/bands', postBand);
+    // app.put('/api/bands/:id', putBand);
+    // app.delete('/api/bands/:id', deleteBand);
 
-// app.get('/api/favorites/', shipCtlr.addFaves);
-// app.delete('/api/rocket/:id', shipCtlr.deleteRocket);
 
-// app.put('/api/rocket/:id', shipCtlr.updateRocketName);
-
-
-app.listen(port, () => { 
-    console.log(`Server reporting for duty from port ${port}`); })
+app.listen(port, () => { console.log(`Server reporting for duty from port ${port}`); })
