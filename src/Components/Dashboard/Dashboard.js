@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Product from '../Product/Product';
 
+
 class Dashboard extends Component {
     
-    render() {
-    
+    render(props) {
+        // console.log(this.props)
     return (
     <div>
-        <Product />
+        <Product inventory= {this.props.inventory}/>
     </div>
     );
     }
+
 }
 
 export default Dashboard;

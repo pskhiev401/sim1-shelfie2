@@ -1,0 +1,21 @@
+.form{
+    width: 15vw;
+    height: 30vh;
+    background-color: #3ad886;
+    border: 1px solid blue;
+}
+
+.form_img_preview{
+    border: 1px solid red;
+}
+
+.form_button-box{
+    color: #d34735;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+
+}
